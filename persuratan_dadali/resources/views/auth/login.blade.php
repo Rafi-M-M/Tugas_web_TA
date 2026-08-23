@@ -85,14 +85,11 @@
                                         @enderror
                                     </div>
 
-                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <div class="mb-4">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="1" id="remember" name="remember">
                                             <label class="form-check-label" for="remember">Ingat saya</label>
                                         </div>
-                                        <a href="{{ route('register') }}" class="text-decoration-none small" style="color: var(--brand);">
-                                            Daftar akun
-                                        </a>
                                     </div>
 
                                     <div class="d-grid">
@@ -111,10 +108,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="text-center mt-3 small text-muted">
-                    Sistem Persuratan Digital Pondok Pesantren Dadali Dinillah
                 </div>
             </div>
         </div>

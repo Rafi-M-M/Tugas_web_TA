@@ -1,0 +1,365 @@
+/* ===== ARSIP SURAT — page-specific styles ===== */
+
+.card-header h3 i {
+    color: #7ec8e3;
+}
+
+.card-body {
+    padding-top: 4px;
+}
+
+.form-shell {
+    border: 1px solid #e2e8f0;
+    background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.form-intro {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 6px 4px 16px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.form-intro h4 {
+    margin: 0;
+    font-size: 18px;
+    color: #0f3b5e;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-intro p {
+    margin: 6px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.form-pill {
+    padding: 8px 12px;
+    background: #eaf5ff;
+    color: #0f3b5e;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.form-pill i {
+    margin-right: 6px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    border: 1px solid #dbe3ec;
+    border-radius: 14px;
+    padding: 12px 14px;
+    box-shadow: inset 0 1px 2px rgba(15, 59, 94, 0.03);
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+    border-color: #7ec8e3;
+}
+
+.form-group textarea {
+    min-height: 110px;
+    line-height: 1.5;
+}
+
+.form-group .helper-text {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.error-text {
+    color: #dc2626;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.upload-box {
+    border: 1px dashed #9ec9e4;
+    border-radius: 16px;
+    background: #f8fbff;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    transition: all 0.2s ease;
+}
+
+.upload-box:hover {
+    border-color: #2d7fc7;
+    background: #f0f8ff;
+}
+
+.upload-box input[type="file"] {
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    width: auto;
+}
+
+.upload-box input[type="file"]::file-selector-button {
+    border: none;
+    border-radius: 999px;
+    background: #0f3b5e;
+    color: #fff;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.upload-hint {
+    font-size: 12px;
+    color: #0f3b5e;
+    font-weight: 600;
+}
+
+.form-actions {
+    margin-top: 8px;
+}
+
+/* ===== TABS ===== */
+.tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+    background: #f1f5f9;
+    border-radius: 16px;
+    padding: 4px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.tab-btn.active {
+    background: #fff;
+    color: #0f3b5e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.tab-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* ===== TABLE ===== */
+.table-wrap {
+    overflow-x: auto;
+    margin-top: 4px;
+}
+
+.empty-row td {
+    text-align: center;
+    color: #94a3b8;
+    padding: 30px 0;
+    font-style: italic;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* ===== ACTION ICONS ===== */
+.action-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.btn-icon {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 4px 6px;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.btn-icon.restore:hover {
+    color: #16a34a;
+}
+
+.btn-icon.delete {
+    color: #64748b;
+}
+
+.btn-icon.delete:hover {
+    color: #dc2626;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 28px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #b91c1c;
+}
+
+.btn-sm {
+    padding: 6px 16px;
+    font-size: 12px;
+}
+
+/* ===== INFO CARD ===== */
+.info-card {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+}
+
+.info-card-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    color: #475569;
+    font-size: 14px;
+}
+
+.info-card-content > i {
+    font-size: 20px;
+    color: #0f3b5e;
+}
+
+.info-card-content a {
+    color: #0f3b5e;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.info-card-content a:hover {
+    text-decoration: underline;
+}
+
+/* ===== SEARCH ===== */
+.table-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    padding: 10px 14px;
+    min-width: 280px;
+}
+
+.search-box i {
+    color: #64748b;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 14px;
+    color: #0f172a;
+}
+
+.search-input::placeholder {
+    color: #94a3b8;
+}
+
+.search-empty-row td {
+    text-align: center;
+    color: #64748b;
+    font-style: italic;
+    padding: 24px 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .tabs {
+        flex-direction: column;
+        background: transparent;
+        gap: 6px;
+    }
+
+    .tab-btn {
+        background: #f1f5f9;
+    }
+
+    .tab-btn.active {
+        background: #fff;
+    }
+
+    .table-toolbar {
+        justify-content: flex-start;
+    }
+
+    .search-box {
+        min-width: 100%;
+    }
+}

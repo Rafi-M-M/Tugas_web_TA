@@ -34,9 +34,9 @@
                             </div>
 
                             <div class="col-12 col-md-7">
-                                @if (session('status'))
+                                @if (session('status') || session('success'))
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                        {{ session('status') }}
+                                        {{ session('status') ?? session('success') }}
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
                                 @endif
@@ -57,24 +57,6 @@
                                             required
                                         >
                                         @error('username')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="role" class="form-label">Hak Akses</label>
-                                        <select
-                                            class="form-select @error('role') is-invalid @enderror"
-                                            id="role"
-                                            name="role"
-                                            required
-                                        >
-                                            <option value="" disabled {{ old('role') ? '' : 'selected' }}>Pilih hak akses</option>
-                                            <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Admin</option>
-                                            <option value="petugas" {{ old('role') === 'petugas' ? 'selected' : '' }}>Petugas</option>
-                                            <option value="pimpinan" {{ old('role') === 'pimpinan' ? 'selected' : '' }}>Pimpinan</option>
-                                        </select>
-                                        @error('role')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -150,10 +132,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="text-center mt-3 small text-muted">
-                    Sistem Persuratan Digital Pondok Pesantren Dadali Dinillah
                 </div>
             </div>
         </div>
