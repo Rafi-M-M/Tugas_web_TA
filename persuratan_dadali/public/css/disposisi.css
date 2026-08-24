@@ -1,0 +1,45 @@
+/* ===== DISPOSISI ===== */
+.table-toolbar { display:flex; justify-content:flex-end; margin-bottom:12px; }
+.search-box { position:relative; max-width:340px; width:100%; }
+.search-box i { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:#94a3b8; font-size:13px; }
+.search-input {
+    width:100%; padding:10px 14px 10px 36px; border:1px solid #e2e8f0; border-radius:12px;
+    font-family:'Inter', sans-serif; font-size:13px; background:#fcfcfd; color:#1e293b;
+}
+.search-input:focus { outline:none; border-color:#2563eb; box-shadow:0 0 0 3px rgba(37,99,235,0.12); background:#fff; }
+
+/* Badge sifat */
+.sifat-badge { display:inline-block; padding:4px 12px; border-radius:40px; font-size:11px; font-weight:600; }
+.sifat-badge.biasa { background:#e2e8f0; color:#475569; }
+.sifat-badge.penting { background:#fef3c7; color:#b45309; }
+.sifat-badge.segera { background:#ffedd5; color:#c2410c; }
+.sifat-badge.sangat-segera { background:#fee2e2; color:#b91c1c; }
+.sifat-badge.rahasia { background:#ede9fe; color:#6d28d9; }
+
+/* Badge status tindak lanjut */
+.status-badge.diproses { background:#dbeafe; color:#1d4ed8; }
+.status-badge.selesai { background:#dcfce7; color:#15803d; }
+.status-badge.ditunda { background:#fef3c7; color:#b45309; }
+.status-badge.terlambat { background:#fee2e2; color:#b91c1c; }
+
+.btn-icon { background:transparent; border:none; cursor:pointer; padding:4px; font-size:14px; color:#64748b; }
+.btn-icon.delete { color:#dc2626; }
+.btn-icon.delete:hover { color:#b91c1c; }
+.inline-form { display:inline; }
+.action-icons { display:flex; align-items:center; justify-content:center; gap:8px; }
+.action-icon-primary { color:#0f3b5e; }
+
+/* Lembar disposisi (halaman detail) */
+.detail-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:18px 28px; }
+.detail-item { display:flex; flex-direction:column; gap:4px; }
+.detail-item.full-width { grid-column:1 / -1; }
+.detail-label { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.3px; color:#94a3b8; }
+.detail-value { font-size:14px; color:#1e293b; line-height:1.6; white-space:pre-line; }
+
+.status-form { display:flex; align-items:flex-end; gap:14px; flex-wrap:wrap; }
+.status-form .form-group { flex:1; min-width:200px; }
+
+@media (max-width:768px) {
+    .detail-grid { grid-template-columns:1fr; }
+    .detail-item.full-width { grid-column:1; }
+}

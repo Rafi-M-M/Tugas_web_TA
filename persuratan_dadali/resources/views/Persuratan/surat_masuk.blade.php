@@ -77,17 +77,6 @@
                                     <div class="error-text">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <!-- <div class="form-group full-width">
-                                <label for="lampiran"><i class="fas fa-paperclip"></i> Lampiran (opsional)</label>
-                                <div class="upload-box">
-                                    <input type="file" id="lampiran" name="lampiran" accept=".pdf,.doc,.docx,.jpg,.png" class="@error('lampiran') is-invalid @enderror">
-                                    <span class="upload-hint"><i class="fas fa-cloud-upload-alt"></i> Pilih file lampiran</span>
-                                </div>
-                                <div class="helper-text">Maks. 2MB, format PDF/DOC/JPG/PNG</div>
-                                @error('lampiran')
-                                    <div class="error-text">{{ $message }}</div>
-                                @enderror
-                            </div> -->
                             <div class="form-actions">
                                 <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Surat</button>
                                 <button type="reset" class="btn btn-secondary"><i class="fas fa-undo-alt"></i> Reset</button>

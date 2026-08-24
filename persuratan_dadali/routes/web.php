@@ -8,6 +8,7 @@ use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\ArsipSuratController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\DisposisiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/surat-keluar', [SuratKeluarController::class, 'index'])->name('surat.keluar.index');
     Route::get('/surat-keluar/{id}', [SuratKeluarController::class, 'show'])->name('surat.keluar.show');
 
+    // Routes untuk Disposisi Surat
+    Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi.index');
+    Route::get('/disposisi/{id}', [DisposisiController::class, 'show'])->name('disposisi.show');
+
     // Routes untuk Arsip Surat
     Route::get('/arsip', [ArsipSuratController::class, 'index'])->name('arsip.index');
     Route::middleware('manage.data')->group(function () {
@@ -90,6 +95,11 @@ Route::middleware('auth')->group(function () {
         Route::delete('/surat-keluar/clear', [SuratKeluarController::class, 'clear'])->name('surat.keluar.clear');
         Route::delete('/surat-keluar/{id}', [SuratKeluarController::class, 'destroy'])->name('surat.keluar.destroy');
         Route::patch('/surat-keluar/{id}/archive', [SuratKeluarController::class, 'archive'])->name('surat.keluar.archive');
+
+        Route::post('/disposisi', [DisposisiController::class, 'store'])->name('disposisi.store');
+        Route::patch('/disposisi/{id}/status', [DisposisiController::class, 'updateStatus'])->name('disposisi.status');
+        Route::delete('/disposisi/clear', [DisposisiController::class, 'clear'])->name('disposisi.clear');
+        Route::delete('/disposisi/{id}', [DisposisiController::class, 'destroy'])->name('disposisi.destroy');
 
         Route::patch('/arsip/surat-masuk/{id}/restore', [ArsipSuratController::class, 'restoreMasuk'])->name('arsip.masuk.restore');
         Route::patch('/arsip/surat-keluar/{id}/restore', [ArsipSuratController::class, 'restoreKeluar'])->name('arsip.keluar.restore');
