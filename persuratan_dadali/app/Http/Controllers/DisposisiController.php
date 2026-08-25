@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Disposisi;
 use App\Models\SuratMasuk;
+use App\Services\NotifikasiService;
 use Illuminate\Http\Request;
 
 class DisposisiController extends Controller
@@ -25,7 +26,7 @@ class DisposisiController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, NotifikasiService $notifikasiService)
     {
         $validated = $request->validate([
             'surat_masuk_id' => 'required|exists:surat_masuks,id',
@@ -41,6 +42,21 @@ class DisposisiController extends Controller
         $validated['status'] = 'Diproses';
 
         $disposisi = Disposisi::create($validated);
+        $disposisi->load(['suratMasuk', 'pembuat']);
+
+        $notifikasiService->notifyRolesAndUsers(['pimpinan'], [], [
+            'disposisi_id' => $disposisi->id,
+            'tipe' => 'disposisi_baru',
+            'judul' => 'Disposisi baru menunggu tinjauan',
+            'pesan' => sprintf(
+                'Disposisi surat %s bersifat %s ditujukan kepada %s, dibuat oleh %s.',
+                $disposisi->suratMasuk?->nomor_surat ?? '-',
+                $disposisi->sifat,
+                $disposisi->ditujukan_kepada,
+                $disposisi->pembuat?->name ?? '-'
+            ),
+            'url' => route('disposisi.show', $disposisi->id, false),
+        ]);
 
         return redirect()->route('disposisi.index')
             ->with('success', "Disposisi untuk surat {$disposisi->suratMasuk->nomor_surat} berhasil dibuat.");
@@ -52,8 +68,40 @@ class DisposisiController extends Controller
 
         return view('Persuratan.disposisi_show', [
             'disposisi' => $disposisi,
+            'sifatOptions' => self::SIFAT,
             'statusOptions' => self::STATUS,
         ]);
+    }
+
+    public function tinjau(Request $request, $id, NotifikasiService $notifikasiService)
+    {
+        $validated = $request->validate([
+            'sifat' => 'required|in:' . implode(',', self::SIFAT),
+            'status' => 'required|in:' . implode(',', self::STATUS),
+            'catatan_pimpinan' => 'nullable|string',
+        ]);
+
+        $disposisi = Disposisi::with(['suratMasuk', 'pembuat'])->findOrFail($id);
+        $disposisi->update(array_merge($validated, [
+            'ditinjau_oleh' => $request->user()->id,
+            'ditinjau_pada' => now(),
+        ]));
+
+        $notifikasiService->notifyRolesAndUsers(['admin'], [$disposisi->user_id], [
+            'disposisi_id' => $disposisi->id,
+            'tipe' => 'disposisi_ditinjau',
+            'judul' => 'Disposisi telah ditinjau pimpinan',
+            'pesan' => sprintf(
+                '%s telah meninjau disposisi surat %s. Sifat: %s, status: %s.',
+                $request->user()->name,
+                $disposisi->suratMasuk?->nomor_surat ?? '-',
+                $disposisi->sifat,
+                $disposisi->status
+            ),
+            'url' => route('disposisi.show', $disposisi->id, false),
+        ]);
+
+        return redirect()->back()->with('success', 'Disposisi berhasil ditinjau.');
     }
 
     public function updateStatus(Request $request, $id)

@@ -9,6 +9,7 @@ use App\Http\Controllers\ArsipSuratController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\DisposisiController;
+use App\Http\Controllers\NotifikasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,14 @@ Route::middleware('auth')->group(function () {
     // Routes untuk Disposisi Surat
     Route::get('/disposisi', [DisposisiController::class, 'index'])->name('disposisi.index');
     Route::get('/disposisi/{id}', [DisposisiController::class, 'show'])->name('disposisi.show');
+    Route::patch('/disposisi/{id}/tinjau', [DisposisiController::class, 'tinjau'])
+        ->middleware('pimpinan')
+        ->name('disposisi.tinjau');
+
+    // Routes untuk Notifikasi
+    Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi.index');
+    Route::post('/notifikasi/baca-semua', [NotifikasiController::class, 'bacaSemua'])->name('notifikasi.baca-semua');
+    Route::patch('/notifikasi/{id}/baca', [NotifikasiController::class, 'baca'])->name('notifikasi.baca');
 
     // Routes untuk Arsip Surat
     Route::get('/arsip', [ArsipSuratController::class, 'index'])->name('arsip.index');

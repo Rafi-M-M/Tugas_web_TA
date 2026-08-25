@@ -68,8 +68,53 @@
                 <span class="detail-label"><i class="fas fa-tasks"></i> Status Tindak Lanjut</span>
                 <span class="detail-value"><span class="status-badge {{ \Str::slug($disposisi->status) }}">{{ $disposisi->status }}</span></span>
             </div>
+            <div class="detail-item">
+                <span class="detail-label"><i class="fas fa-user-check"></i> Ditinjau Oleh</span>
+                <span class="detail-value">{{ $disposisi->peninjau?->name ?? 'Belum ditinjau' }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label"><i class="fas fa-calendar-check"></i> Ditinjau Pada</span>
+                <span class="detail-value">{{ $disposisi->ditinjau_pada?->format('d F Y, H:i') ?? '-' }}</span>
+            </div>
+            <div class="detail-item full-width">
+                <span class="detail-label"><i class="fas fa-comment-dots"></i> Catatan Pimpinan</span>
+                <span class="detail-value">{{ $disposisi->catatan_pimpinan ?: '-' }}</span>
+            </div>
         </div>
     </div>
+
+    @if(auth()->user()?->role === 'pimpinan')
+    <div class="card">
+        <div class="card-header">
+            <h3><i class="fas fa-clipboard-check"></i> Tinjau Disposisi</h3>
+        </div>
+        <form action="{{ route('disposisi.tinjau', $disposisi->id) }}" method="POST" class="status-form review-form">
+            @csrf
+            @method('PATCH')
+            <div class="form-group">
+                <label for="review-sifat"><i class="fas fa-flag"></i> Sifat</label>
+                <select id="review-sifat" name="sifat" required>
+                    @foreach($sifatOptions as $sifat)
+                        <option value="{{ $sifat }}" @selected($disposisi->sifat === $sifat)>{{ $sifat }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="review-status"><i class="fas fa-flag-checkered"></i> Status</label>
+                <select id="review-status" name="status" required>
+                    @foreach($statusOptions as $status)
+                        <option value="{{ $status }}" @selected($disposisi->status === $status)>{{ $status }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group review-note">
+                <label for="catatan_pimpinan"><i class="fas fa-comment-dots"></i> Catatan Pimpinan</label>
+                <input type="text" id="catatan_pimpinan" name="catatan_pimpinan" value="{{ old('catatan_pimpinan', $disposisi->catatan_pimpinan) }}" placeholder="Catatan tinjauan (opsional)">
+            </div>
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Tinjauan</button>
+        </form>
+    </div>
+    @endif
 
     @if($canManage)
     <div class="card">

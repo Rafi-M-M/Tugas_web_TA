@@ -13,16 +13,6 @@
 @section('content')
     @php($canManage = auth()->user()?->role !== 'pimpinan')
 
-    @unless($canManage)
-        <div class="card">
-            <div class="card-body">
-                <div class="helper-text" style="font-size:14px; color:#334155;">
-                    Role pimpinan hanya bisa melihat data disposisi.
-                </div>
-            </div>
-        </div>
-    @endunless
-
     @if($canManage)
     <!-- ===== CARD FORM ===== -->
     <div class="card">
@@ -161,7 +151,12 @@
                         <td>{{ \Str::limit($item->ditujukan_kepada, 30) }}</td>
                         <td><span class="sifat-badge {{ \Str::slug($item->sifat) }}">{{ $item->sifat }}</span></td>
                         <td>{{ $item->batas_waktu?->format('d M Y') ?? '-' }}</td>
-                        <td><span class="status-badge {{ \Str::slug($item->status) }}">{{ $item->status }}</span></td>
+                        <td>
+                            <span class="status-badge {{ \Str::slug($item->status) }}">{{ $item->status }}</span>
+                            @if(!$item->ditinjau_pada)
+                                <span class="review-pending">Menunggu tinjauan</span>
+                            @endif
+                        </td>
                         <td class="text-center">
                             <div class="action-icons">
                                 <a href="{{ route('disposisi.show', $item->id) }}" class="action-icon-primary" title="Lihat Lembar Disposisi"><i class="fas fa-eye"></i></a>

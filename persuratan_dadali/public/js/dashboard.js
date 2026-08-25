@@ -90,5 +90,29 @@ document.querySelectorAll('.sidebar-menu a').forEach(link => {
     });
 });
 
+// Notifikasi dropdown
+// ===== Notification dropdown =====
+(function initNotifications() {
+    const toggle = document.getElementById('notificationToggle');
+    const dropdown = document.getElementById('notificationDropdown');
+
+    if (!toggle || !dropdown) {
+        return;
+    }
+
+    toggle.addEventListener('click', function (event) {
+        event.stopPropagation();
+        const isOpen = dropdown.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!dropdown.contains(event.target) && event.target !== toggle) {
+            dropdown.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+})();
+
 console.log('🚀 Dashboard Manajemen Persuratan Digital — Dadali Dinillah');
 console.log('📌 Responsive siap untuk HP & desktop.');

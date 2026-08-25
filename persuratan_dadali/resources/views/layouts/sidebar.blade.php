@@ -13,6 +13,14 @@
         <li><a href="{{ route('surat.keluar.index') }}" class="{{ request()->routeIs('surat.keluar.*') ? 'active' : '' }}"><i class="fas fa-paper-plane"></i> Surat Keluar</a></li>
         <li><a href="{{ route('template.index') }}" class="{{ request()->routeIs('template.*') ? 'active' : '' }}"><i class="fas fa-file-alt"></i> Template Surat</a></li>
         <li><a href="{{ route('disposisi.index') }}" class="{{ request()->routeIs('disposisi.*') ? 'active' : '' }}"><i class="fas fa-code-branch"></i> Disposisi</a></li>
+        <li>
+            <a href="{{ route('notifikasi.index') }}" class="{{ request()->routeIs('notifikasi.*') ? 'active' : '' }}">
+                <i class="fas fa-bell"></i> Notifikasi
+                @if(($unreadCount ?? 0) > 0)
+                    <span class="sidebar-notification-count">{{ $unreadCount }}</span>
+                @endif
+            </a>
+        </li>
         <li><a href="{{ route('arsip.index') }}" class="{{ request()->routeIs('arsip.*') ? 'active' : '' }}"><i class="fas fa-archive"></i> Arsip Surat</a></li>
 
         @if(auth()->user()?->role === 'admin')
