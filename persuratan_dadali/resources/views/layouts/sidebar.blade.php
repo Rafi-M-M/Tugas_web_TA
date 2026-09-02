@@ -13,35 +13,24 @@
         <li><a href="{{ route('surat.keluar.index') }}" class="{{ request()->routeIs('surat.keluar.*') ? 'active' : '' }}"><i class="fas fa-paper-plane"></i> Surat Keluar</a></li>
         <li><a href="{{ route('template.index') }}" class="{{ request()->routeIs('template.*') ? 'active' : '' }}"><i class="fas fa-file-alt"></i> Template Surat</a></li>
         <li><a href="{{ route('disposisi.index') }}" class="{{ request()->routeIs('disposisi.*') ? 'active' : '' }}"><i class="fas fa-code-branch"></i> Disposisi</a></li>
-        <li>
-            <a href="{{ route('notifikasi.index') }}" class="{{ request()->routeIs('notifikasi.*') ? 'active' : '' }}">
-                <i class="fas fa-bell"></i> Notifikasi
-                @if(($unreadCount ?? 0) > 0)
-                    <span class="sidebar-notification-count">{{ $unreadCount }}</span>
-                @endif
-            </a>
-        </li>
         <li><a href="{{ route('arsip.index') }}" class="{{ request()->routeIs('arsip.*') ? 'active' : '' }}"><i class="fas fa-archive"></i> Arsip Surat</a></li>
 
-        @if(auth()->user()?->role === 'admin')
-            <li class="menu-label">Pengelolaan</li>
-            <li><a href="{{ route('akun.index') }}" class="{{ request()->routeIs('akun.*') ? 'active' : '' }}"><i class="fas fa-users"></i> Akun</a></li>
-            <!-- <li><a href="{{ route('register') }}" class="{{ request()->routeIs('register') ? 'active' : '' }}"><i class="fas fa-user-plus"></i> Register</a></li> -->
-            <li><a href="{{-- route('pengaturan.index') --}}"><i class="fas fa-cog"></i> Pengaturan</a></li>
-        @endif
-        <li class="menu-label">Logout</li>
+        <li class="menu-label">Pengelolaan</li>
+        <li><a href="{{ route('akun.index') }}" class="{{ request()->routeIs('akun.*') ? 'active' : '' }}"><i class="fas fa-users"></i> Akun</a></li>
+
+        <li class="menu-label" style="margin-top: auto;">Akun</li>
         <li>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
-            @csrf
-                <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" style="display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: 12px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s ease;">
-            <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
+            <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+                @csrf
+                <button type="submit" style="width: 100%; text-align: left; border: none; background: none; color: inherit; padding: 10px 0; cursor: pointer; display: flex; align-items: center; gap: 12px; font-size: 14px;">
+                    <i class="fas fa-sign-out-alt"></i> Keluar
+                </button>
             </form>
         </li>
     </ul>
 
     <div class="sidebar-footer">
         <i class="fas fa-shield-alt"></i>
-        <span>Hak Akses: {{ ucfirst(auth()->user()?->role ?? '-') }}</span>
+        <span>Hak Akses: Admin</span>
     </div>
 </aside>

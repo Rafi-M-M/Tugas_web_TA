@@ -31,7 +31,6 @@
                     <select id="role" name="role" required class="@error('role') is-invalid @enderror">
                         <option value="" disabled selected>Pilih hak akses</option>
                         <option value="admin">Admin</option>
-                        <option value="petugas">Petugas</option>
                         <option value="pimpinan">Pimpinan</option>
                     </select>
                     @error('role')

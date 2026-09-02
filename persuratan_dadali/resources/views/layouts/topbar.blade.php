@@ -14,53 +14,29 @@
             <i class="fas fa-moon" id="themeIcon"></i>
         </button>
         @auth
-        <div class="notification-menu">
-            <button class="notification-toggle" id="notificationToggle" type="button" aria-label="Notifikasi" aria-expanded="false">
-                <i class="fas fa-bell"></i>
-                @if(($unreadCount ?? 0) > 0)
-                    <span class="notification-count">{{ $unreadCount }}</span>
-                @endif
-            </button>
-            <div class="notification-dropdown" id="notificationDropdown">
-                <div class="notification-dropdown-header">
-                    <strong>Notifikasi</strong>
-                    @if(($unreadCount ?? 0) > 0)
-                        <form action="{{ route('notifikasi.baca-semua') }}" method="POST">
-                            @csrf
-                            <button type="submit">Tandai semua dibaca</button>
-                        </form>
-                    @endif
-                </div>
-                <div class="notification-list">
-                    @forelse(($latestNotifications ?? collect()) as $notification)
-                        <form action="{{ route('notifikasi.baca', $notification->id) }}" method="POST" class="notification-item {{ $notification->dibaca_pada ? '' : 'unread' }}">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit">
-                                <span class="notification-item-icon"><i class="fas {{ $notification->tipe === 'disposisi_ditinjau' ? 'fa-clipboard-check' : 'fa-code-branch' }}"></i></span>
-                                <span class="notification-item-content">
-                                    <strong>{{ $notification->judul }}</strong>
-                                    <span>{{ \Str::limit($notification->pesan, 90) }}</span>
-                                    <small>{{ $notification->created_at->diffForHumans() }}</small>
-                                </span>
-                            </button>
-                        </form>
-                    @empty
-                        <div class="notification-empty">Belum ada notifikasi.</div>
-                    @endforelse
-                </div>
-                <a href="{{ route('notifikasi.index') }}" class="notification-see-all">Lihat semua <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </div>
+        
         @php
             $name = auth()->user()->name;
             $initials = strtoupper(collect(explode(' ', $name))->map(fn($word) => mb_substr($word, 0, 1))->take(2)->implode(''));
         @endphp
-        <div class="admin-badge">
-            <div class="avatar">{{ $initials }}</div>
-            <div class="admin-info">
-                <div class="name">{{ $name }}</div>
-                <div class="role">{{ ucfirst(auth()->user()->role) }}</div>
+        <div class="admin-menu">
+            <button class="admin-badge" id="adminMenuToggle" type="button" aria-label="User menu" aria-expanded="false">
+                <div class="avatar">{{ $initials }}</div>
+                <div class="admin-info">
+                    <div class="name">{{ $name }}</div>
+                    <div class="role">{{ ucfirst(auth()->user()->role) }}</div>
+                </div>
+            </button>
+            <div class="admin-dropdown" id="adminDropdown">
+                <a href="{{ route('akun.index') }}" class="admin-dropdown-item">
+                    <i class="fas fa-users"></i> Manajemen Akun
+                </a>
+                <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+                    @csrf
+                    <button type="submit" class="admin-dropdown-item logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Keluar
+                    </button>
+                </form>
             </div>
         </div>
         @endauth

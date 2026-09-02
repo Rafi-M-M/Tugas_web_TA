@@ -24,14 +24,14 @@ class AkunController extends Controller
         ];
 
         if ($request->routeIs('akun.store')) {
-            $rules['role'] = ['required', 'string', 'in:admin,petugas,pimpinan'];
+            $rules['role'] = ['required', 'string', 'in:admin,pimpinan'];
         }
 
         $validated = $request->validate($rules);
 
         User::create([
             'name' => $validated['username'],
-            'role' => $validated['role'] ?? 'petugas',
+            'role' => $validated['role'] ?? 'admin',
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
